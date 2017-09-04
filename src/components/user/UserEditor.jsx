@@ -4,9 +4,10 @@ import Input from '../form/Input';
 import { post, put} from '../../utils/request';
 import Select from '../form/Select';
 import formProvider from '../../utils/formProvider';
+import config from '../../config/config';
 import './style.css';
 
-const fetchUrl = 'http://localhost:3001/user';
+const fetchUrl = `${config.fetchUrl}/user`;
 
 class UserEditor extends React.Component {
   constructor(props){

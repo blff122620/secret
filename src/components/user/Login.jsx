@@ -2,6 +2,7 @@ import React from 'react';
 import { post } from '../../utils/request';
 import formProvider from '../../utils/formProvider';
 import Input from '../form/Input';
+import config from '../../config/config';
 import './style.css';
 
 class Login extends React.Component{
@@ -19,7 +20,7 @@ class Login extends React.Component{
       return;
     }
 
-    post(this.props.history, 'http://localhost:3001/login', {
+    post(this.props.history, `${config.fetchUrl}/login`, {
       account: account.value,
       password: password.value
     })

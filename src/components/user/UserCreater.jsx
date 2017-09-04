@@ -4,9 +4,10 @@ import Input from '../form/Input';
 import Select from '../form/Select';
 import { post } from '../../utils/request';
 import formProvider from '../../utils/formProvider';
+import config from '../../config/config';
 import './style.css';
 
-const fetchUrl = 'http://localhost:3001/user';
+const fetchUrl = `${config.fetchUrl}/user`;
 class UserAdd extends React.Component {
   constructor(props){
     super(props);

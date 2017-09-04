@@ -2,8 +2,9 @@ import React from 'react';
 import HomeLayout from '../layout/HomeLayout';
 import UserEditor from '../user/UserEditor';
 import { get } from '../../utils/request';
+import config from '../../config/config';
 
-const fetchUrl = 'http://localhost:3001/user/';
+const fetchUrl = `${config.fetchUrl}/user`;
 class UserEditorPage extends React.Component{
   constructor (props) {
     super(props);
@@ -13,7 +14,7 @@ class UserEditorPage extends React.Component{
   }
   componentWillMount () {
     const userId = this.props.match.params.id;
-    get(this.props.history, fetchUrl + userId)
+    get(this.props.history, `${fetchUrl}/${userId}`)
       // .then(res => res.json())
       .then(res => {
         console.log(res);

@@ -1,14 +1,7 @@
 {
   "user": [
     {
-      "username": "1382504101",
-      "name": "1",
-      "age": "1",
-      "gender": "male",
-      "id": 8
-    },
-    {
-      "username": "1382504101",
+      "username": "138",
       "name": "1",
       "age": "1",
       "gender": "male",
@@ -132,6 +125,13 @@
       "age": "3",
       "gender": "male",
       "id": 26
+    },
+    {
+      "username": "3",
+      "name": "33",
+      "age": "3",
+      "gender": "male",
+      "id": 27
     }
   ],
   "book": [

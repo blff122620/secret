@@ -8,8 +8,9 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import { get, del } from '../../utils/request';
+import config from '../../config/config';
 
-const fetchUrl = 'http://localhost:3001/user';
+const fetchUrl = `${config.fetchUrl}/user`;
 
 class UserList extends React.Component{
   
