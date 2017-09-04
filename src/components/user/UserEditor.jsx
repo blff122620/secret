@@ -5,23 +5,41 @@ import Select from '../form/Select';
 import formProvider from '../../utils/formProvider';
 import './style.css';
 
-const fetchUrl = 'http://localhost:3001/user';
-class UserAdd extends React.Component {
+let fetchUrl = 'http://localhost:3001/user';
+let method = 'post';
+class UserEditor extends React.Component {
   constructor(props){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillMount () {
+    const {editTarget, setFormValues} = this.props;
+    if (editTarget) {
+      setFormValues(editTarget);
+    }
+    else{
+      // 非编辑，那么清空state
+      setFormValues();
+    }
+  }
   handleSubmit(e){
     e.preventDefault();
     
-    const {form: {username, name, age, gender}, formValid} = this.props;
+    const {form: {username, name, age, gender}, formValid, editTarget} = this.props;
     if(!formValid()){
       return;
     }
     const self = this;
+    let editType = '添加';
+    
+    if (editTarget) {
+      editType = '编辑';
+      fetchUrl += '/' + editTarget.id;
+      method = 'put';
+    }
     fetch(fetchUrl, {
-      method: 'post',
+      method,
       body: JSON.stringify({
         username: username.value,
         name:name.value,
@@ -63,7 +81,7 @@ class UserAdd extends React.Component {
     );
   }
 }
-const ValidUserAdd = formProvider(UserAdd, {
+const ValidUserEditor = formProvider(UserEditor, {
   username:{
     defaultValue: '',
     rules:[
@@ -112,4 +130,4 @@ const ValidUserAdd = formProvider(UserAdd, {
     ],
   },
 });
-export default ValidUserAdd;
+export default ValidUserEditor;

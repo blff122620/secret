@@ -3,10 +3,14 @@ import $ from './utils';
 
 function formProvider(WrappedForm, fields){
   const initialFormState = {};
-  for(const key in fields){
-    initialFormState[key] = {
-      value: fields[key].defaultValue,
-      error: '',
+  clearForm(fields);
+  // 清空form的state
+  function clearForm(fields){
+    for(const key in fields){
+      initialFormState[key] = {
+        value: fields[key].defaultValue,
+        error: '',
+      }
     }
   }
   return class ValidForm extends React.Component{
@@ -18,8 +22,28 @@ function formProvider(WrappedForm, fields){
       };
       this.handleChange = this.handleChange.bind(this);
       this.checkFormValid = this.checkFormValid.bind(this);
+      this.setFormValues = this.setFormValues.bind(this);
     }
-
+    // 编辑用设置表单数值
+    setFormValues(values){
+      if (!values) {
+        clearForm(fields);
+        this.state = {
+          form: initialFormState
+        };
+        return;
+      }
+      const {form} = this.state;
+      const newForm = {...form};
+      for(const field in newForm){
+        if(newForm.hasOwnProperty(field)){
+          if(typeof values[field] !== 'undefined'){
+            newForm[field].value = values[field];
+          }
+        }
+      }
+      this.setState({ form: newForm });
+    }
     // 验证表单数值有效性
     checkFormValid(){
       const { form } = this.state;
@@ -78,7 +102,7 @@ function formProvider(WrappedForm, fields){
     render(){
       const {form} = this.state;
       return (
-        <WrappedForm form={form} formValid={this.checkFormValid} onFormChange={this.handleChange} {...this.props} />
+        <WrappedForm form={form} formValid={this.checkFormValid} onFormChange={this.handleChange} setFormValues={this.setFormValues} {...this.props} />
       );
     }
   };

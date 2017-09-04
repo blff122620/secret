@@ -6,7 +6,7 @@ class UserListPage extends React.Component{
   render(){
     return (
       <HomeLayout title="用户列表">
-        <UserList />
+        <UserList {...this.props}/>
       </HomeLayout>
     );
   }

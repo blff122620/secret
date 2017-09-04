@@ -1,73 +1,32 @@
 {
   "user": [
     {
-      "id": 10000,
-      "name": "一韬",
-      "age": 25,
-      "gender": "male"
-    },
-    {
-      "name": "1",
-      "age": "",
-      "gender": "male",
-      "id": 10043
-    },
-    {
-      "name": "1",
-      "age": "",
-      "gender": "male",
-      "id": 10044
-    },
-    {
-      "name": "1",
-      "age": "1",
-      "gender": "male",
-      "id": 10045
-    },
-    {
-      "name": "1",
-      "age": "",
-      "gender": "male",
-      "id": 10046
-    },
-    {
-      "name": "1",
-      "age": "3",
-      "gender": "male",
-      "id": 10047
-    },
-    {
-      "name": "1312",
-      "age": "1",
-      "gender": "male",
-      "id": 10048
-    },
-    {
-      "name": "是大发送",
-      "age": "2",
-      "gender": "male",
-      "id": 10049
-    },
-    {
-      "username": "blff122620",
-      "name": "ba",
-      "age": "33",
-      "gender": "male",
-      "id": 10050
-    },
-    {
-      "username": "bbbb",
-      "name": "123",
-      "age": "33",
-      "gender": "male",
-      "id": 10051
-    },
-    {
       "username": "1",
       "name": "1",
       "age": "1",
       "gender": "male",
-      "id": 10052
+      "id": 1
+    },
+    {
+      "username": "blff",
+      "name": "鲍旭",
+      "age": "22",
+      "gender": "male",
+      "id": 2
+    },
+    {
+      "username": "bbbb",
+      "name": "444",
+      "age": "2",
+      "gender": "female",
+      "id": 3
+    },
+    {
+      "username": "cccccc",
+      "name": "1111",
+      "age": "1",
+      "gender": "male",
+      "id": 4
     }
   ],
   "book": [

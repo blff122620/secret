@@ -1,12 +1,12 @@
 import React from 'react';
 import HomeLayout from '../layout/HomeLayout';
-import UserCreater from '../user/UserCreater';
+import UserEditor from '../user/UserEditor';
 
 class UserCreaterPage extends React.Component{
   render(){
     return (
       <HomeLayout title="添加用户">
-        <UserCreater />
+        <UserEditor {...this.props}/>
       </HomeLayout>
     );
   }
