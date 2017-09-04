@@ -1,12 +1,13 @@
 import React from 'react';
 
 import Input from '../form/Input';
+import { post, put} from '../../utils/request';
 import Select from '../form/Select';
 import formProvider from '../../utils/formProvider';
 import './style.css';
 
-let fetchUrl = 'http://localhost:3001/user';
-let method = 'post';
+const fetchUrl = 'http://localhost:3001/user';
+
 class UserEditor extends React.Component {
   constructor(props){
     super(props);
@@ -31,37 +32,38 @@ class UserEditor extends React.Component {
       return;
     }
     const self = this;
-    let editType = '添加';
-    
+    let newFetchUrl, method;
     if (editTarget) {
-      editType = '编辑';
-      fetchUrl += '/' + editTarget.id;
+      newFetchUrl = fetchUrl + '/' + editTarget.id;
       method = 'put';
     }
-    fetch(fetchUrl, {
-      method,
-      body: JSON.stringify({
+    else{
+      newFetchUrl = fetchUrl;
+      method = 'post';
+    }
+
+    choseFetch(method === 'put'? put: post);
+    function choseFetch(method){
+      method(self.props.history, newFetchUrl, {
         username: username.value,
         name:name.value,
         age:age.value,
         gender:gender.value,
-      }),
-      headers: { 
-        'Content-Type': 'application/json',
-      },
-    }).then((res) => {
-      if(res.ok){
-        console.log(res);
-        self.props.history.push('/user/list')
-      }
-    });
+     
+      }).then((res) => {
+        
+        if(res){
+          self.props.history.push('/user/list')
+        }
+      }).catch((err) => alert(err));
+    }
     
   }
   render () {
     const {form: {username, name, age, gender}, onFormChange} = this.props;
     return (
       
-      <div className="m-useradd">
+      <div className="align-center">
         <form onSubmit={this.handleSubmit} >
           <Input errorText={username.error} className="m-input" hintText="请填写用户名" required floatingLabelText="用户名" value={username.value} type="text" name="username" onChange={(e) => onFormChange(e)} />
           <Input errorText={name.error} className="m-input" hintText="请填写姓名" required floatingLabelText="姓名" value={name.value} type="text" name="name" onChange={(e) => onFormChange(e)} />
@@ -72,7 +74,7 @@ class UserEditor extends React.Component {
           ]} onChange={(e, index, value) => onFormChange(e, index, value, 'gender')} />
           
           <br/>
-          <div className="m-useradd">
+          <div className="align-center">
             <Input className="m-input" type="submit" primary value="提交"/>
           </div>
         </form>

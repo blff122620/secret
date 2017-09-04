@@ -7,6 +7,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import { get, del } from '../../utils/request';
 
 const fetchUrl = 'http://localhost:3001/user';
 
@@ -22,12 +23,15 @@ class UserList extends React.Component{
   }
   
   componentWillMount(){
-    fetch(fetchUrl)
-    .then(res => res.json())
+    get(this.props.history, fetchUrl)
+    // .then(res => res.json())
     .then(res => {
       this.setState({
         userList: res
       });
+    })
+    .catch((err) => {
+      alert(err);
     });
   }
   handleEdit(user){
@@ -35,10 +39,8 @@ class UserList extends React.Component{
   }
   handleDel(user){
     if (window.confirm(`确定要删除用户 ${user.name} 吗？`)) {
-      fetch(`${fetchUrl}/${user.id}`, {
-        method: 'delete'
-      })
-        .then(res => res.json())
+      del(this.props.history, `${fetchUrl}/${user.id}`)
+        // .then(res => res.json())
         .then(res => {
           this.setState({
             userList: this.state.userList.filter(item => item.id !== user.id)
@@ -58,8 +60,8 @@ class UserList extends React.Component{
         width: '800px'
       }}>
       {userList.length>0 ? 
-        <Table selectable={false}>
-          <TableHeader>
+        <Table selectable={false} >
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn>ID</TableHeaderColumn>
               <TableHeaderColumn>用户名</TableHeaderColumn>
@@ -69,7 +71,7 @@ class UserList extends React.Component{
               <TableHeaderColumn>操作</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody displayRowCheckbox={false}>
             {userList.map((user,idx) => (
               <TableRow key={user.id}>
                 <TableRowColumn>{user.id}</TableRowColumn>

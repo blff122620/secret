@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeLayout from '../layout/HomeLayout';
 import UserEditor from '../user/UserEditor';
+import { get } from '../../utils/request';
 
 const fetchUrl = 'http://localhost:3001/user/';
 class UserEditorPage extends React.Component{
@@ -12,8 +13,8 @@ class UserEditorPage extends React.Component{
   }
   componentWillMount () {
     const userId = this.props.match.params.id;
-    fetch(fetchUrl + userId)
-      .then(res => res.json())
+    get(this.props.history, fetchUrl + userId)
+      // .then(res => res.json())
       .then(res => {
         console.log(res);
         this.setState({

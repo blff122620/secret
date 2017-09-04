@@ -2,6 +2,7 @@ import React from 'react';
 
 import Input from '../form/Input';
 import Select from '../form/Select';
+import { post } from '../../utils/request';
 import formProvider from '../../utils/formProvider';
 import './style.css';
 
@@ -20,30 +21,26 @@ class UserAdd extends React.Component {
       return;
     }
     const self = this;
-    fetch(fetchUrl, {
-      method: 'post',
-      body: JSON.stringify({
+    post(this.props.history, fetchUrl, {
+     
         username: username.value,
         name:name.value,
         age:age.value,
         gender:gender.value,
-      }),
-      headers: { 
-        'Content-Type': 'application/json',
-      },
+     
     }).then((res) => {
       if(res.ok){
         console.log(res);
         self.props.history.push('/user/list')
       }
-    });
+    }).catch((err) => alert(err));
     
   }
   render () {
     const {form: {username, name, age, gender}, onFormChange} = this.props;
     return (
       
-      <div className="m-useradd">
+      <div className="align-center">
         <form onSubmit={this.handleSubmit} >
           <Input errorText={username.error} className="m-input" hintText="请填写用户名" required floatingLabelText="用户名" value={username.value} type="text" name="username" onChange={(e) => onFormChange(e)} />
           <Input errorText={name.error} className="m-input" hintText="请填写姓名" required floatingLabelText="姓名" value={name.value} type="text" name="name" onChange={(e) => onFormChange(e)} />
@@ -54,7 +51,7 @@ class UserAdd extends React.Component {
           ]} onChange={(e, index, value) => onFormChange(e, index, value, 'gender')} />
           
           <br/>
-          <div className="m-useradd">
+          <div className="align-center">
             <Input className="m-input" type="submit" primary value="提交"/>
           </div>
         </form>
