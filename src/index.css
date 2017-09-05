@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+input:-webkit-autofill {
+  /* 处理chrome 自动填充的黄色背景 */
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
