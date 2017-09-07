@@ -20,7 +20,7 @@ class Login extends React.Component{
       return;
     }
 
-    post(this.props.history, `${config.fetchUrl}/login`, {
+    post(this.props.history, config.url.login, {
       account: account.value,
       password: password.value
     })
@@ -47,7 +47,7 @@ class Login extends React.Component{
           }>
             <Input type="submit" primary value="提交"/>
           </div>
-          
+
         </form>
       </div>
     );

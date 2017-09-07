@@ -7,7 +7,7 @@ import formProvider from '../../utils/formProvider';
 import config from '../../config/config';
 import './style.css';
 
-const fetchUrl = `${config.fetchUrl}/user`;
+const fetchUrl = config.url.user;
 class UserAdd extends React.Component {
   constructor(props){
     super(props);
@@ -16,31 +16,31 @@ class UserAdd extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    
+
     const {form: {username, name, age, gender}, formValid} = this.props;
     if(!formValid()){
       return;
     }
     const self = this;
     post(this.props.history, fetchUrl, {
-     
+
         username: username.value,
         name:name.value,
         age:age.value,
         gender:gender.value,
-     
+
     }).then((res) => {
       if(res.ok){
         console.log(res);
         self.props.history.push('/user/list')
       }
     }).catch((err) => alert(err));
-    
+
   }
   render () {
     const {form: {username, name, age, gender}, onFormChange} = this.props;
     return (
-      
+
       <div className="align-center">
         <form onSubmit={this.handleSubmit} >
           <Input errorText={username.error} className="m-input" hintText="请填写用户名" required floatingLabelText="用户名" value={username.value} type="text" name="username" onChange={(e) => onFormChange(e)} />
@@ -50,14 +50,14 @@ class UserAdd extends React.Component {
             {value:'male',name:'男'},
             {value:'female',name:'女'},
           ]} onChange={(e, index, value) => onFormChange(e, index, value, 'gender')} />
-          
+
           <br/>
           <div className="align-center">
             <Input className="m-input" type="submit" primary value="提交"/>
           </div>
         </form>
       </div>
-       
+
     );
   }
 }
@@ -106,7 +106,7 @@ const ValidUserAdd = formProvider(UserAdd, {
   gender:{
     defaultValue: 'male',
     rules:[
-      
+
     ],
   },
 });

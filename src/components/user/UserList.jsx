@@ -9,11 +9,10 @@ import {
 } from 'material-ui/Table';
 import { get, del } from '../../utils/request';
 import config from '../../config/config';
-
-const fetchUrl = `${config.fetchUrl}/user`;
+const fetchUrl = config.url.user;
 
 class UserList extends React.Component{
-  
+
   constructor (props) {
     super(props);
     this.state = {
@@ -22,7 +21,7 @@ class UserList extends React.Component{
     this.handleDel = this.handleDel.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
-  
+
   componentWillMount(){
     get(this.props.history, fetchUrl)
     // .then(res => res.json())
@@ -60,7 +59,7 @@ class UserList extends React.Component{
       <div style={{
         width: '800px'
       }}>
-      {userList.length>0 ? 
+      {userList.length>0 ?
         <Table selectable={false} >
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
@@ -86,7 +85,7 @@ class UserList extends React.Component{
                 </TableRowColumn>
               </TableRow>
             ))}
-          
+
           </TableBody>
         </Table>
         :

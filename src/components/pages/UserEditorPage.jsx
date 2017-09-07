@@ -4,7 +4,7 @@ import UserEditor from '../user/UserEditor';
 import { get } from '../../utils/request';
 import config from '../../config/config';
 
-const fetchUrl = `${config.fetchUrl}/user`;
+const fetchUrl = config.url.user;
 class UserEditorPage extends React.Component{
   constructor (props) {
     super(props);
